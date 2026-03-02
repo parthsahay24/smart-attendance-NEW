@@ -328,7 +328,11 @@ export default function Settings() {
         await loadProfile(serverProfile);
       }
       // optional: show toast success
-      toast.success("Settings saved successfully!");
+      toast.success(
+        t('settings.alerts.save_success', {
+          defaultValue: 'Settings saved successfully!',
+        }),
+      );
     } catch (err) {
       console.error("Save profile failed", err);
       setSaveError(err.message || t('settings.alerts.save_failed'));
