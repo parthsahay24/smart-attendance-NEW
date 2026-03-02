@@ -303,9 +303,6 @@ export default function Settings() {
       const payload = {
         name: profile.name,
         phone: profile.phone,
-        role: profile.role,
-        branch: profile.branch,
-        avatarUrl: profile.avatarUrl,
         settings: {
           thresholds: {
             warningVal,
@@ -322,11 +319,7 @@ export default function Settings() {
       };
       const updated = await patchSettings(payload); // your API helper
       // update local profile from server response (server returns serialized doc)
-      const serverProfile =
-        updated.profile ?? updated.settings?.profile ?? null;
-      if (serverProfile) {
-        await loadProfile(serverProfile);
-      }
+      await loadProfile(updated);
       // optional: show toast success
       toast.success(
         t('settings.alerts.save_success', {
